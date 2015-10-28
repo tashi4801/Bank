@@ -1,12 +1,15 @@
 package com.example.domain;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
@@ -25,11 +28,11 @@ import lombok.NoArgsConstructor;
 public class BankForm {
 	
 	/**  id	 **/
-	private Integer id;
+	private String id;
 	/**
 	 * 日付
 	 */
-//	@NotEmpty(message="日付が入力されておりません。")
+	@NotNull(message="日付が入力されておりません。")
 	private Date date;
 	/**
 	 * ユーザーId
@@ -39,18 +42,18 @@ public class BankForm {
 	 * 収支の選択
 	 */
 	@NotEmpty(message="収支の選択がされておりません。")
-	private Integer revenueSpending;
+	private String revenueSpending;
 	/**
 	 * 金額
 	 */
-	@Min(value=0,message="金額はマイナス")
+	@Min(value=0,message="金額はマイナスになっています。")
 	@NotNull(message="金額が入力されておりません。")
-	private Integer money;
+	private String money;
 	
 	/**
 	 * 備考
 	 */
 	@NotEmpty(message="備考が入力されておりません。")
-//	@Size(max=127,message="文字は${max}以下で入力してください。")
+	@Size(min=0, max=127)
 	private String memo;
 }

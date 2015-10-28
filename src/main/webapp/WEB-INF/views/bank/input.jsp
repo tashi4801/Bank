@@ -17,10 +17,10 @@
 	さん
 	<br>
 	<form:form action="/banController/bankInput" modelAttribute="bankForm"
-		method="post">
-			<form:label path="date">日付：</form:label>
-			<form:input type="date" path="date"/>
-			<form:errors path="date" />
+		method="post" >
+			<form:label  path="date">日付：</form:label>
+			<form:input  type="date" path="date"/>
+			<form:errors path="date"/>
 		<br>
 		<form:select path="revenueSpending">
 <%-- 			<form:option value="" selected>--</form:option> --%>
@@ -30,15 +30,14 @@
 		</form:select>
 		<br> 
 		<form:label path="money">金額：</form:label>
-		<form:input path="money"
-			/>円<br>
-			<form:errors path="money" />
+		<form:input path="money"/>円<br>
+			<form:errors path="money"/>
 		
 		<form:label path="memo">備考：</form:label>
 		<form:input path="memo"/>
-			<form:input type="hidden" path="userid"
-			value="<c:out value ="${user.id}"/>" />
-			<form:errors path="memo" />
+		<form:errors path="memo" />
+<%-- 			<form:input path="userid" --%>
+<%-- 			value="<c:out value ="${user.id}"/>"/> --%>
 		<input type="submit" value="入力">
 	</form:form>
 </body>

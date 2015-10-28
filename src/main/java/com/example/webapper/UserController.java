@@ -35,10 +35,10 @@ public class UserController {
 	    return new UserForm();
 	  }
 	 
-	 @ModelAttribute
-		public User setUser(){
-			return new User();
-		}
+//	 @ModelAttribute
+//		public User setUser(){
+//			return new User();
+//		}
 	
 	@RequestMapping
 	public String index() {

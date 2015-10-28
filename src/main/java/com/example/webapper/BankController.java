@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,19 +39,27 @@ public class BankController {
 //			@RequestParam("revenueSpending") Integer revenueSpending,
 //			@RequestParam("money") Integer money,
 //			@RequestParam("userid") Integer userid,
+			@Validated
 			BankForm bankForm,
+			BindingResult result,//入力チェック
 			Bank bank,
 			RedirectAttributes attributes) {
+		
+		
+		if(result.hasErrors()){
+			System.out.println("入力失敗");
+			return "bank/input";
+		}
 		bank.setUserid(bankForm.getUserid());
 		System.out.println(bank.getMemo());
 		String message = null;
 		if (bankForm.getRevenueSpending().equals(1)) {
-			bank.setRevenue(bankForm.getMoney());
+			bank.setRevenue(Integer.parseInt(bankForm.getMoney()));
 			message = "収入";
 			bank.setSpending(0);
 		}
 		if (bankForm.getRevenueSpending().equals(2)) {
-			bank.setSpending(bankForm.getMoney());
+			bank.setSpending(Integer.parseInt(bankForm.getMoney()));
 			bank.setRevenue(0);
 			message = "支出";
 		}
