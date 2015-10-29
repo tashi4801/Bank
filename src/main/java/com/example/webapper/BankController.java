@@ -1,8 +1,10 @@
 package com.example.webapper;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.domain.Bank;
 import com.example.domain.BankForm;
 import com.example.service.BankService;
+
+import common.Todate;
 
 @Controller
 @RequestMapping("/banController")
@@ -36,30 +40,26 @@ public class BankController {
 
 	@RequestMapping(value = "/bankInput", method = RequestMethod.POST)
 	public String bankInput(
-//			@RequestParam("revenueSpending") Integer revenueSpending,
-//			@RequestParam("money") Integer money,
-//			@RequestParam("userid") Integer userid,
 			@Validated
 			BankForm bankForm,
 			BindingResult result,//入力チェック
-			Bank bank,
+//			Bank bank,
 			RedirectAttributes attributes) {
-		
-		
 		if(result.hasErrors()){
 			System.out.println("入力失敗");
 			return "bank/input";
 		}
+		Bank bank=new Bank();
+		System.out.println(bankForm);
 		bank.setUserid(bankForm.getUserid());
-		System.out.println(bank.getMemo());
 		String message = null;
 		if (bankForm.getRevenueSpending().equals(1)) {
-			bank.setRevenue(Integer.parseInt(bankForm.getMoney()));
+			bank.setRevenue(bankForm.getMoney());
 			message = "収入";
 			bank.setSpending(0);
 		}
 		if (bankForm.getRevenueSpending().equals(2)) {
-			bank.setSpending(Integer.parseInt(bankForm.getMoney()));
+			bank.setSpending(bankForm.getMoney());
 			bank.setRevenue(0);
 			message = "支出";
 		}
@@ -75,7 +75,11 @@ public class BankController {
 		}
 		stock = stock + bank.getRevenue() - bank.getSpending();
 		bank.setStock(stock);
+		bank.setMemo(bankForm.getMemo());
+		bank.setDate(Todate.toDate(bankForm.getDate(),"yyyy-MM-dd"));
 		bankService.created(bank);
+		
+		
 		attributes.addFlashAttribute("bank", bank);
 		attributes.addFlashAttribute("bankForm", bankForm);
 		attributes.addFlashAttribute("message", message);

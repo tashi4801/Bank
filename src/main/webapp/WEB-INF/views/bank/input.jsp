@@ -10,7 +10,6 @@
 <title>入力画面</title>
 </head>
 <body>
-	<br>
 	<c:out value="${user.id}" />
 	：
 	<c:out value="${user.name}" />
@@ -32,12 +31,12 @@
 		<form:label path="money">金額：</form:label>
 		<form:input path="money"/>円<br>
 			<form:errors path="money"/>
-		
+		<br> 
 		<form:label path="memo">備考：</form:label>
 		<form:input path="memo"/>
-		<form:errors path="memo" />
-<%-- 			<form:input path="userid" --%>
-<%-- 			value="<c:out value ="${user.id}"/>"/> --%>
+		<br> <form:errors path="memo" />
+			<br> <form:hidden path="userid"
+			value="${user.id}"/> 
 		<input type="submit" value="入力">
 	</form:form>
 </body>
