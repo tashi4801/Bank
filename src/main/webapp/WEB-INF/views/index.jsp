@@ -9,9 +9,14 @@
 </head>
 <body>
 <h1>ログイン</h1>
+
 <form action="/userLogin" method="post">
-名前：<input type="text" name="name">
-パスワード：<input type="password" name="password">
+<%-- <c:if test="${param.error}">名前またはパスワードが違います。</c:if> --%>
+名前：<input type="text" name="name" placeholder="Username"
+			required="required" autofocus="autofocus" >
+パスワード：<input type="password" name="password" placeholder="Password"
+			required="required">
+<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
 <input type="submit" value="ログイン">
 </form>
 <c:out value="${message}"/>

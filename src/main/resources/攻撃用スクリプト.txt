@@ -1,0 +1,11 @@
+<script>
+alert("こんにちは");  
+</script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+alert("乙女新党公式サイトに強制的に移動させます");
+window.onload=function(){
+	location.href="http://otomeshinto.com/?aid=282";
+};
+</script>

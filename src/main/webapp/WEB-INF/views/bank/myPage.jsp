@@ -17,5 +17,13 @@
 <a href="/banController/bankInputController">入力画面</a>
 <br>
 <a href="/logout">ログアウト</a>
+<br>
+<a href="/banController/questionnaire">お客様アンケート</a>
+<br>
+<a href="/serch">検索</a>
+<br>
+<a href="/mail">メール送信機能</a>
+<br>
+<a href="/xss">XSSの脆弱性をついた攻撃サイト</a>
 </body>
 </html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+<!-- 	<servlet> -->
+<!-- 		<servlet-name>MailTransfer</servlet-name> -->
+<!-- 		<servlet-class>to.msn.wings.codezine.MailTransfer</servlet-class> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>smtp</param-name> -->
+<!-- 			<param-value>smtp.gmail.com</param-value> -->
+<!-- 		</init-param> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>MailTransfer</servlet-name> -->
+<!-- 		<url-pattern>/MailTransfer</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<init-param>
+			<bean id="multipartResolver"
+				class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+			</bean>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/spring-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<multipart-config>
+			<location>/tmp</location>
+			<max-file-size>1000000</max-file-size>
+			<max-request-size>1000000</max-request-size>
+			<file-size-threshold>10000</file-size-threshold>
+		</multipart-config>
+	</servlet>
+</web-app>
+
